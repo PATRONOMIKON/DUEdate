@@ -1,5 +1,5 @@
 
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Sidebar() {
   return (
@@ -12,25 +12,25 @@ function Sidebar() {
       <p className="nav-heading">MENU</p>
 
       <nav className="navigation">
-        <Link to="/" className="nav-link active">
+        <NavLink to="/" end className="nav-link">
           <span>▦</span> Dashboard
-        </Link>
+        </NavLink>
 
-        <Link to="/assignments" className="nav-link">
+        <NavLink to="/assignments" className="nav-link">
           <span>▤</span> My Assignments
-        </Link>
+        </NavLink>
 
-        <Link to="/calendar" className="nav-link">
+        <NavLink to="/calendar" className="nav-link">
           <span>▦</span> Calendar
-        </Link>
+        </NavLink>
 
-        <Link to="/add-assignment" className="nav-link">
+        <NavLink to="/add-assignment" className="nav-link">
           <span>＋</span> Add Assignment
-        </Link>
+        </NavLink>
 
-        <Link to="/resources" className="nav-link">
+        <NavLink to="/resources" className="nav-link">
           <span>▣</span> Resources
-        </Link>
+        </NavLink>
       </nav>
 
       <div className="sidebar-footer">

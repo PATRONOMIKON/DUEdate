@@ -570,3 +570,60 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* PAGE STYLES */
+
+.page-description {
+  color: #64748B;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.page-placeholder {
+  background: white;
+  border-radius: 14px;
+  padding: 35px;
+  margin-top: 25px;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+}
+
+.page-placeholder h2 {
+  margin-bottom: 12px;
+  color: #1E293B;
+}
+
+.page-placeholder p {
+  color: #64748B;
+}
+
+.not-found {
+  text-align: center;
+  padding-top: 100px;
+}
+
+.not-found h1 {
+  color: #1D4ED8;
+  font-size: 90px;
+}
+
+.not-found h2 {
+  margin: 15px 0;
+}
+
+.not-found p {
+  color: #64748B;
+  margin-bottom: 25px;
+}
+
+.back-home {
+  display: inline-block;
+  background: #1D4ED8;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 8px;
+}
+
+.back-home:hover {
+  background: #1E40AF;
+}
