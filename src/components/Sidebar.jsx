@@ -1,41 +1,39 @@
 
 import { NavLink } from "react-router-dom";
 
-function Sidebar() {
+function Sidebar({ isOpen, onNavigate }) {
+  const links = [
+    { to: "/", label: "Dashboard", icon: "🏠", end: true },
+    { to: "/assignments", label: "My Assignments", icon: "📚" },
+    { to: "/calendar", label: "Calendar", icon: "📅" },
+    { to: "/add-assignment", label: "Add Assignment", icon: "＋" },
+    { to: "/resources", label: "Resources", icon: "🔎" },
+  ];
+
   return (
-    <aside className="sidebar">
-      <div className="logo">
-        <span className="logo-icon">✓</span>
-        <h2>DUEdate</h2>
+    <aside className={`sidebar ${isOpen ? "sidebar-open" : ""}`}>
+      <div className="sidebar-logo">
+        <h1>DUEdate</h1>
+        <p>Student Planner</p>
       </div>
 
-      <p className="nav-heading">MENU</p>
-
-      <nav className="navigation">
-        <NavLink to="/" end className="nav-link">
-          <span>▦</span> Dashboard
-        </NavLink>
-
-        <NavLink to="/assignments" className="nav-link">
-          <span>▤</span> My Assignments
-        </NavLink>
-
-        <NavLink to="/calendar" className="nav-link">
-          <span>▦</span> Calendar
-        </NavLink>
-
-        <NavLink to="/add-assignment" className="nav-link">
-          <span>＋</span> Add Assignment
-        </NavLink>
-
-        <NavLink to="/resources" className="nav-link">
-          <span>▣</span> Resources
-        </NavLink>
+      <nav className="sidebar-nav">
+        {links.map((link) => (
+          <NavLink
+            key={link.to}
+            to={link.to}
+            end={link.end}
+            className="nav-link"
+            onClick={onNavigate}
+          >
+            <span className="nav-icon">{link.icon}</span>
+            <span>{link.label}</span>
+          </NavLink>
+        ))}
       </nav>
 
       <div className="sidebar-footer">
-        <p>Stay organized.</p>
-        <strong>Stay ahead. 💙</strong>
+        <p>Stay organized. Stay ahead.</p>
       </div>
     </aside>
   );
