@@ -2,34 +2,32 @@
 import Header from "../components/Header";
 import StatsCard from "../components/StatsCard";
 import UpcomingAssignments from "../components/UpcomingAssignments";
+import { useAssignments } from "../context/AssignmentContext";
 
 function Dashboard() {
-  const assignments = [
-    {
-      id: 1,
-      title: "Research Paper",
-      course: "Biology",
-      dueDate: "2026-11-20",
-      priority: "High",
-      status: "In Progress",
-    },
-    {
-      id: 2,
-      title: "Chapter 5 Exercises",
-      course: "Mathematics",
-      dueDate: "2026-11-22",
-      priority: "Medium",
-      status: "Not Started",
-    },
-    {
-      id: 3,
-      title: "History Presentation",
-      course: "History",
-      dueDate: "2026-11-25",
-      priority: "Low",
-      status: "In Progress",
-    },
-  ];
+  const { assignments } = useAssignments();
+
+  const today = new Date().toISOString().split("T")[0];
+
+  const totalAssignments = assignments.length;
+
+  const completedAssignments = assignments.filter(
+    (assignment) => assignment.status === "Completed"
+  ).length;
+
+  const inProgressAssignments = assignments.filter(
+    (assignment) => assignment.status === "In Progress"
+  ).length;
+
+  const upcomingAssignments = assignments.filter(
+    (assignment) =>
+      assignment.status !== "Completed" &&
+      assignment.dueDate >= today
+  );
+
+  const sortedUpcoming = [...upcomingAssignments]
+    .sort((a, b) => a.dueDate.localeCompare(b.dueDate))
+    .slice(0, 3);
 
   return (
     <main className="main-content">
@@ -46,7 +44,7 @@ function Dashboard() {
       <section className="stats-grid">
         <StatsCard
           title="Total Assignments"
-          value="12"
+          value={totalAssignments}
           icon="📚"
           color="#E8F1FF"
           subtitle="All your coursework"
@@ -54,7 +52,7 @@ function Dashboard() {
 
         <StatsCard
           title="Completed"
-          value="5"
+          value={completedAssignments}
           icon="✓"
           color="#E6F8EF"
           subtitle="Great job!"
@@ -62,7 +60,7 @@ function Dashboard() {
 
         <StatsCard
           title="In Progress"
-          value="4"
+          value={inProgressAssignments}
           icon="⌛"
           color="#FFF4DF"
           subtitle="Keep going"
@@ -70,14 +68,14 @@ function Dashboard() {
 
         <StatsCard
           title="Upcoming"
-          value="3"
+          value={upcomingAssignments.length}
           icon="📅"
           color="#F0EAFF"
           subtitle="Deadlines approaching"
         />
       </section>
 
-      <UpcomingAssignments assignments={assignments} />
+      <UpcomingAssignments assignments={sortedUpcoming} />
     </main>
   );
 }
